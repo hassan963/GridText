@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">GridText</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    //list_row_each_item
+    <string name="productName">Name</string>
+    <string name="productQuantity">Quantity</string>
+    <string name="productPrice">Price</string>
+
+    //grid_row_each_click
+    <string name="productNameG">Name</string>
+
+    //category_list
+    <string name="categoryBTN">Name</string>
+    <string name="sumFood">Hello</string>
+
+</resources>
