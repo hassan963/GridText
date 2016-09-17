@@ -9,6 +9,10 @@ public class Receipt_Food {
     private String foodPrice;
     private String foodQuantity;
 
+    public Receipt_Food() {
+        this.foodQuantity = "1";
+    }
+
     public Receipt_Food(String foodName, String foodQuantity, String foodPrice) {
         this.foodName = foodName;
         this.foodQuantity = foodQuantity;

@@ -8,6 +8,15 @@ public class Food_Item {
     private String name;
     private String price;
     private int img;
+    private String quantity;
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
 
     public String getPrice() {
         return price;
@@ -18,11 +27,11 @@ public class Food_Item {
     }
 
 
-
-    public Food_Item(String name, int img, String price) {
+    public Food_Item(String name, int img, String price, String quantity) {
         this.name = name;
         this.img = img;
         this.price = price;
+        this.quantity = quantity;
     }
 
     public int getImage() {

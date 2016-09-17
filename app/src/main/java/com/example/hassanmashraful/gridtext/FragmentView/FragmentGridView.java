@@ -23,13 +23,12 @@ import java.util.ArrayList;
 public class FragmentGridView extends Fragment {
 
 
-
     private String foodName;
     String foodPrice;
 
     private GridAdapter gridAdapter;
     onFoodItemListener onFoodItemListener;
-    ArrayList<Food_Item> foodItems = new ArrayList<Food_Item>();
+    ArrayList<Food_Item> foodItems = new ArrayList<>();
     ArrayList<TempReceipt> tempReceipts = new ArrayList<>();
     int pos = 0;
 
@@ -56,7 +55,6 @@ public class FragmentGridView extends Fragment {
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         recyclerView.setLayoutManager(gridLayoutManager);
-        
 
 
 
@@ -85,12 +83,9 @@ public class FragmentGridView extends Fragment {
     }
 
 
-
-
-
     public interface onFoodItemListener {
 
-        public void setFoodItem(String name, String price);
+        void setFoodItem(String name, String price);
 
     }
 
@@ -102,7 +97,6 @@ public class FragmentGridView extends Fragment {
             onFoodItemListener = (onFoodItemListener) context;
         } catch (Exception e) {
         }
-        ;
 
     }
 
@@ -135,59 +129,56 @@ public class FragmentGridView extends Fragment {
 
         foodItems.clear();
         if (pos == 0) {
-            foodItems.add(new Food_Item(names[0], images[0], prices[0]));
-            foodItems.add(new Food_Item(names[1], images[1], prices[1]));
-            foodItems.add(new Food_Item(names[2], images[2], prices[2]));
-            foodItems.add(new Food_Item(names[3], images[3], prices[3]));
-            foodItems.add(new Food_Item(names[4], images[4], prices[4]));
-            foodItems.add(new Food_Item(names[5], images[5], prices[5]));
-            foodItems.add(new Food_Item(names[6], images[6], prices[6]));
-            foodItems.add(new Food_Item(names[7], images[7], prices[7]));
-            foodItems.add(new Food_Item(names[8], images[8], prices[8]));
-            foodItems.add(new Food_Item(names[9], images[9], prices[9]));
+            foodItems.add(new Food_Item(names[0], images[0], prices[0], "1"));
+            foodItems.add(new Food_Item(names[1], images[1], prices[1], "1"));
+            foodItems.add(new Food_Item(names[2], images[2], prices[2], "1"));
+            foodItems.add(new Food_Item(names[3], images[3], prices[3], "1"));
+            foodItems.add(new Food_Item(names[4], images[4], prices[4], "1"));
+            foodItems.add(new Food_Item(names[5], images[5], prices[5], "1"));
+            foodItems.add(new Food_Item(names[6], images[6], prices[6], "1"));
+            foodItems.add(new Food_Item(names[7], images[7], prices[7], "1"));
+            foodItems.add(new Food_Item(names[8], images[8], prices[8], "1"));
+            foodItems.add(new Food_Item(names[9], images[9], prices[9], "1"));
         } else if (pos == 1) {
-            foodItems.add(new Food_Item(names[6], images[6], prices[6]));
-            foodItems.add(new Food_Item(names[7], images[7], prices[7]));
-            foodItems.add(new Food_Item(names[8], images[8], prices[8]));
-            foodItems.add(new Food_Item(names[9], images[9], prices[9]));
+            foodItems.add(new Food_Item(names[6], images[6], prices[6], "1"));
+            foodItems.add(new Food_Item(names[7], images[7], prices[7], "1"));
+            foodItems.add(new Food_Item(names[8], images[8], prices[8], "1"));
+            foodItems.add(new Food_Item(names[9], images[9], prices[9], "1"));
         } else if (pos == 2) {
-            foodItems.add(new Food_Item(names[2], images[2], prices[2]));
-            foodItems.add(new Food_Item(names[3], images[3], prices[3]));
-            foodItems.add(new Food_Item(names[8], images[8], prices[8]));
-            foodItems.add(new Food_Item(names[9], images[9], prices[9]));
+            foodItems.add(new Food_Item(names[2], images[2], prices[2], "1"));
+            foodItems.add(new Food_Item(names[3], images[3], prices[3], "1"));
+            foodItems.add(new Food_Item(names[8], images[8], prices[8], "1"));
+            foodItems.add(new Food_Item(names[9], images[9], prices[9], "1"));
         }
 
         gridAdapter.notifyDataSetChanged();
 
     }
 
-    public ArrayList<Food_Item> getFoodItems(){
+    public ArrayList<Food_Item> getFoodItems() {
         return foodItems;
     }
 
 
     public ArrayList<Food_Item> getDrinks() {
-        ArrayList<Food_Item> foodItems = new ArrayList<Food_Item>();
+        ArrayList<Food_Item> foodItems = new ArrayList<>();
 
-        foodItems.add(new Food_Item(names[6], images[6], prices[6]));
-        foodItems.add(new Food_Item(names[7], images[7], prices[7]));
-        foodItems.add(new Food_Item(names[8], images[8], prices[8]));
-        foodItems.add(new Food_Item(names[9], images[9], prices[9]));
+        foodItems.add(new Food_Item(names[6], images[6], prices[6], "1"));
+        foodItems.add(new Food_Item(names[7], images[7], prices[7], "1"));
+        foodItems.add(new Food_Item(names[8], images[8], prices[8], "1"));
+        foodItems.add(new Food_Item(names[9], images[9], prices[9], "1"));
 
         return foodItems;
     }
 
     public ArrayList<Food_Item> getBuffo() {
         ArrayList<Food_Item> food_itemRICEs = new ArrayList<>();
-        food_itemRICEs.add(new Food_Item(names[2], images[2], prices[2]));
-        food_itemRICEs.add(new Food_Item(names[3], images[3], prices[3]));
-        food_itemRICEs.add(new Food_Item(names[8], images[8], prices[8]));
-        food_itemRICEs.add(new Food_Item(names[9], images[9], prices[9]));
+        food_itemRICEs.add(new Food_Item(names[2], images[2], prices[2], "1"));
+        food_itemRICEs.add(new Food_Item(names[3], images[3], prices[3], "1"));
+        food_itemRICEs.add(new Food_Item(names[8], images[8], prices[8], "1"));
+        food_itemRICEs.add(new Food_Item(names[9], images[9], prices[9], "1"));
         return food_itemRICEs;
     }
-
-
-
 
 
 }

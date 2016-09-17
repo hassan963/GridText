@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.hassanmashraful.gridtext.R;
@@ -21,6 +21,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     private LayoutInflater inflater;
     private ArrayList<Receipt_Food> receiptFoods;
     private Context context;
+    private String foodName;
 
     public ListAdapter(ArrayList<Receipt_Food> receiptFoods, Context context) {
         inflater = LayoutInflater.from(context);
@@ -32,7 +33,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = inflater.inflate(R.layout.temp_layout, parent, false);
-        MyViewHolder viewHolder = new MyViewHolder(view);
+        MyViewHolder viewHolder = new MyViewHolder(view, context, receiptFoods);
 
         return viewHolder;
     }
@@ -52,20 +53,69 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         return receiptFoods.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    public void remove(int position) {
+        receiptFoods.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView productName, productQuantity, productPrice;
-        ImageButton plusBTN;
+        Button plusBTN, minusBTN;
+        Context context;
+        ArrayList<Receipt_Food> receiptFoods;
 
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(View itemView, Context context, ArrayList<Receipt_Food> receipt_foods) {
             super(itemView);
-
+            this.context = context;
+            this.receiptFoods = receipt_foods;
             productName = (TextView) itemView.findViewById(R.id.productName);
             productQuantity = (TextView) itemView.findViewById(R.id.productQuantity);
             productPrice = (TextView) itemView.findViewById(R.id.productPrice);
-            plusBTN = (ImageButton) itemView.findViewById(R.id.plusBTN);
+            plusBTN = (Button) itemView.findViewById(R.id.plusBTN);
+            minusBTN = (Button) itemView.findViewById(R.id.minusBTN);
+            plusBTN.setOnClickListener(this);
+            minusBTN.setOnClickListener(this);
+
 
         }
+
+
+        @Override
+        public void onClick(View v) {
+
+            int position = getAdapterPosition();
+            Receipt_Food receipt_food = this.receiptFoods.get(position);
+
+            if (v.getId() == plusBTN.getId()) {
+
+                increment(receipt_food.getFoodPrice());
+
+            } else if (v.getId() == minusBTN.getId()) {
+                decrement(receipt_food.getFoodPrice());
+
+            }
+
+
+        }
+
+        public void increment(String price) {
+            int currentNos = Integer.parseInt(productQuantity.getText().toString());
+
+            productQuantity.setText(String.valueOf(++currentNos));
+            int currentPrice = Integer.parseInt(price);
+            productPrice.setText(String.valueOf(currentNos * currentPrice));
+        }
+
+        public void decrement(String price) {
+            int currentNos = Integer.parseInt(productQuantity.getText().toString());
+            productQuantity.setText(String.valueOf(--currentNos));
+            int currentPrice = Integer.parseInt(price);
+            productPrice.setText(String.valueOf(currentNos * currentPrice));
+        }
+
+
     }
+
 
 }

@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements FragmentGridView.
         }
 
         fragment = (FragmentGridView) getSupportFragmentManager().findFragmentById(R.id.containerGrid);
-        fragmentListView = (FragmentListView) getSupportFragmentManager().findFragmentById(R.id.containerList);
+        //fragmentListView = (FragmentListView) getSupportFragmentManager().findFragmentById(R.id.containerList);
 
         listView = (ListView) findViewById(R.id.categoryList);
         sumFood = (TextView) findViewById(R.id.sumFood);
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements FragmentGridView.
         buttons.add("Rice");
         buttons.add("Drinks");
         buttons.add("Buffo");
-        ArrayAdapter<String> marrayAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_category, R.id.categoryBTN, buttons);
+        ArrayAdapter<String> marrayAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.list_category, R.id.categoryBTN, buttons);
         listView.setAdapter(marrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements FragmentGridView.
     @Override
     public void setFoodItem(String name, String price) {
         FragmentListView fragmentListView = (FragmentListView) getSupportFragmentManager().findFragmentById(R.id.containerList);
-        fragmentListView.updateInfo(name, price);
+        //fragmentListView.updateInfo(name, price);
         //sum =  fragmentListView.getSum();
         //sumFood.setText(String.valueOf(sum));
     }
