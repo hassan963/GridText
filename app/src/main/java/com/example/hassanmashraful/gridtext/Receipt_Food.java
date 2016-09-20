@@ -9,6 +9,25 @@ public class Receipt_Food {
     private String foodPrice;
     private String foodQuantity;
 
+    private String showPrice;
+    private String showQuantity;
+
+    public String getShowPrice() {
+        return showPrice;
+    }
+
+    public void setShowPrice(String showPrice) {
+        this.showPrice = showPrice;
+    }
+
+    public String getShowQuantity() {
+        return showQuantity;
+    }
+
+    public void setShowQuantity(String showQuantity) {
+        this.showQuantity = showQuantity;
+    }
+
     public Receipt_Food() {
         this.foodQuantity = "1";
     }
@@ -17,6 +36,8 @@ public class Receipt_Food {
         this.foodName = foodName;
         this.foodQuantity = foodQuantity;
         this.foodPrice = foodPrice;
+        this.showPrice = foodPrice;
+        this.showQuantity = foodQuantity;
     }
 
     public String getFoodName() {
