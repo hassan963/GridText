@@ -7,8 +7,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hassanmashraful.gridtext.FragmentView.FragmentGridView;
 import com.example.hassanmashraful.gridtext.FragmentView.FragmentListView;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements FragmentGridView.
     ListView listView;
     ArrayList<String> buttons;
     FragmentGridView fragment;
-    TextView sumFood;
+    Button sumFood;
     FragmentListView fragmentListView;
     Float sum;
 
@@ -33,23 +34,20 @@ public class MainActivity extends AppCompatActivity implements FragmentGridView.
         setContentView(R.layout.temp_main_layout);
 
 
-
-        if (getSupportFragmentManager().findFragmentById(R.id.containerList)==null) {
+        if (getSupportFragmentManager().findFragmentById(R.id.containerList) == null) {
             getSupportFragmentManager().beginTransaction().add(R.id.containerList, new FragmentListView()).commit();
 
         }
 
-        if (getSupportFragmentManager().findFragmentById(R.id.containerGrid)==null){
+        if (getSupportFragmentManager().findFragmentById(R.id.containerGrid) == null) {
             getSupportFragmentManager().beginTransaction().add(R.id.containerGrid, new FragmentGridView()).commit();
         }
 
         fragment = (FragmentGridView) getSupportFragmentManager().findFragmentById(R.id.containerGrid);
-        //fragmentListView = (FragmentListView) getSupportFragmentManager().findFragmentById(R.id.containerList);
+        fragmentListView = (FragmentListView) getSupportFragmentManager().findFragmentById(R.id.containerList);
 
         listView = (ListView) findViewById(R.id.categoryList);
-        sumFood = (TextView) findViewById(R.id.sumFood);
-
-
+        sumFood = (Button) findViewById(R.id.sumFood);
 
 
         buttons = new ArrayList<>();
@@ -70,13 +68,23 @@ public class MainActivity extends AppCompatActivity implements FragmentGridView.
             }
         });
 
-
+        sumFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "MAIN ACTIVITY", Toast.LENGTH_SHORT).show();
+                fragmentListView.showFOOD();
+            }
+        });
 
 
 
 
     }
 
+  /* public void sumFood(View view){
+        Toast.makeText(getApplicationContext(), "MAIN ACTIVITY", Toast.LENGTH_SHORT).show();
+        fragmentListView.showFOOD();
+    }*/
 
 
     @Override
@@ -103,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements FragmentGridView.
 
     @Override
     public void setFoodItem(String name, String price) {
-        FragmentListView fragmentListView = (FragmentListView) getSupportFragmentManager().findFragmentById(R.id.containerList);
+        //FragmentListView fragmentListView = (FragmentListView) getSupportFragmentManager().findFragmentById(R.id.containerList);
         //fragmentListView.updateInfo(name, price);
         //sum =  fragmentListView.getSum();
         //sumFood.setText(String.valueOf(sum));
