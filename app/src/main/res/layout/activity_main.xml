@@ -51,7 +51,7 @@
                 android:layout_width="200dp"
                 android:divider="@android:color/transparent"
                 android:dividerHeight="4.0sp"
-                android:layout_height="wrap_content">
+                android:layout_height="450dp">
             </ListView>
 
         </LinearLayout>
@@ -60,20 +60,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-        android:id="@+id/sumFood"
-        android:text="@string/sumFood"
-        android:textColor="#000"
-        android:textSize="40sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    </LinearLayout>
 
 
 
