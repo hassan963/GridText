@@ -15,6 +15,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hassanmashraful.gridtext.Adapter.ListAdapter;
@@ -38,14 +40,17 @@ public class FragmentListView extends Fragment {
     DataBaseHelper dataBaseHelper;
     SQLiteDatabase sqLiteDatabase;
 
+    TextView totalTV, vatTotalTV, discountTV, netTotalTV;
+    EditText vatET, discountET;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_list_main, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_reycle_list, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycleListView);
-        adapter_list = new ListAdapter(getReceipt_foods(), getActivity());
+        adapter_list = new ListAdapter(getReceipt_foods(), getActivity(), FragmentListView.this);
         recyclerView.setAdapter(adapter_list);
 
         recyclerView.setHasFixedSize(true);
@@ -53,13 +58,38 @@ public class FragmentListView extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
 
+
+        //receipt item
+        totalTV = (TextView) rootView.findViewById(R.id.totalTV);
+        vatTotalTV = (TextView) rootView.findViewById(R.id.vatTotalTV);
+        discountTV = (TextView) rootView.findViewById(R.id.discountTV);
+        netTotalTV = (TextView) rootView.findViewById(R.id.netTotalTV);
+        vatET = (EditText) rootView.findViewById(R.id.vatET);
+        discountET = (EditText) rootView.findViewById(R.id.discountET);
+
         //Swapping item will delete row items
-        ItemTouchHelper.Callback callback = new SwapListItemDelete(adapter_list);
+        ItemTouchHelper.Callback callback = new SwapListItemDelete(adapter_list, FragmentListView.this);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
 
+        discountTV.setText("0.00");
+
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mGridMessageReceiver,
                 new IntentFilter("grid-message"));
+
+        vatET.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFOOD();
+            }
+        });
+
+        discountET.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFOOD();
+            }
+        });
 
 
         return rootView;
@@ -82,13 +112,12 @@ public class FragmentListView extends Fragment {
     public void setReceipt_foods(String name, String quantity, String price) {
 
         receipt_foods.add(new Receipt_Food(name, quantity, price));
-
+        showFOOD();
 
     }
 
     public ArrayList<Receipt_Food> getReceipt_foods() {
         //Toast.makeText(getActivity(), receipt_foods.size() + " SIZE", Toast.LENGTH_SHORT).show();
-
 
         return receipt_foods;
 
@@ -97,8 +126,8 @@ public class FragmentListView extends Fragment {
 
     public void showFOOD() {
         int sum = 0, p_quantity;
-        Float p_price, p_total = null;
-        String p_name;
+        Float p_price = 0.00f, p_total = 0.00f, net_total = 0.00f;
+        String p_name, vat, discount;
 
         Calendar c = Calendar.getInstance();
 
@@ -128,18 +157,49 @@ public class FragmentListView extends Fragment {
             p_name = receipt_foods.get(i).getFoodName();
 
             //int p_key, String p_name, float p_price, int p_quantity, float p_total
-            dataBaseHelper.addTempTableInfo(sqLiteDatabase, count, p_name, p_price, p_quantity);
+            //dataBaseHelper.addTempTableInfo(sqLiteDatabase, count, p_name, p_price, p_quantity);
 
 
         }
         //int p_key, String date, String month, String year, String time, Float p_total
-        dataBaseHelper.addReceiptTableInfo(sqLiteDatabase, count, day, month, year, time, p_total);
+        //dataBaseHelper.addReceiptTableInfo(sqLiteDatabase, count, day, month, year, time, p_total);
+        totalTV.setText(String.valueOf(p_total));
         dataBaseHelper.close();
         count++;
         Toast.makeText(getActivity(), "Total ::::" + sum, Toast.LENGTH_SHORT).show();
         //receipt_foods.clear();
 
+        //calculation
+        vat = vatET.getText().toString();
+        discount = discountET.getText().toString();
+        if (vat.equals("")) {
+            Float vatT = (p_total * 15) / 100;
+
+            if (discount.equals("")) {
+                net_total = p_total + vatT - 0;
+            } else {
+                net_total = p_total + vatT - Float.parseFloat(discount);
+            }
+            vatTotalTV.setText(String.valueOf(vatT));
+            discountTV.setText(discount);
+            netTotalTV.setText(String.valueOf(net_total));
+        } else {
+            Float vatT = p_total * Float.parseFloat(vat) / 100;
+
+            if (discount.equals("")) {
+                net_total = p_total + vatT - 0;
+            } else {
+                net_total = p_total + vatT - Float.parseFloat(discount);
+            }
+
+            vatTotalTV.setText(String.valueOf(vatT));
+            discountTV.setText(discount);
+            netTotalTV.setText(String.valueOf(net_total));
+        }
+
+
     }
+
 
 
    /* public void dateTimeFormat(){

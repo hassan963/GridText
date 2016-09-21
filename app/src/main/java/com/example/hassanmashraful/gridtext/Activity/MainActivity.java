@@ -1,4 +1,4 @@
-package com.example.hassanmashraful.gridtext;
+package com.example.hassanmashraful.gridtext.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.hassanmashraful.gridtext.FragmentView.FragmentGridView;
 import com.example.hassanmashraful.gridtext.FragmentView.FragmentListView;
+import com.example.hassanmashraful.gridtext.R;
 
 import java.util.ArrayList;
 
@@ -43,6 +44,10 @@ public class MainActivity extends AppCompatActivity implements FragmentGridView.
             getSupportFragmentManager().beginTransaction().add(R.id.containerGrid, new FragmentGridView()).commit();
         }
 
+       /* if (getSupportFragmentManager().findFragmentById(R.id.containerReceipt) == null){
+            getSupportFragmentManager().beginTransaction().add(R.id.containerReceipt, new FragmentReceipt()).commit();
+        }
+*/
         fragment = (FragmentGridView) getSupportFragmentManager().findFragmentById(R.id.containerGrid);
         fragmentListView = (FragmentListView) getSupportFragmentManager().findFragmentById(R.id.containerList);
 

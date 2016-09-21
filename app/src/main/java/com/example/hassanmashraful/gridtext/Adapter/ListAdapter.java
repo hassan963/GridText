@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.hassanmashraful.gridtext.FragmentView.FragmentListView;
 import com.example.hassanmashraful.gridtext.R;
 import com.example.hassanmashraful.gridtext.Receipt_Food;
 
@@ -21,18 +22,20 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     private LayoutInflater inflater;
     private ArrayList<Receipt_Food> receiptFoods;
     private Context context;
-    private String foodName;
+    private FragmentListView fragmentListView;
 
-    public ListAdapter(ArrayList<Receipt_Food> receiptFoods, Context context) {
+
+    public ListAdapter(ArrayList<Receipt_Food> receiptFoods, Context context, FragmentListView fragment) {
         inflater = LayoutInflater.from(context);
         this.receiptFoods = receiptFoods;
         this.context = context;
+        this.fragmentListView = fragment;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = inflater.inflate(R.layout.temp_layout, parent, false);
+        View view = inflater.inflate(R.layout.fragment_list_row, parent, false);
         MyViewHolder viewHolder = new MyViewHolder(view, context, receiptFoods);
 
         return viewHolder;
@@ -84,22 +87,45 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         @Override
         public void onClick(View v) {
 
+
             int position = getAdapterPosition();
             Receipt_Food receipt_food = this.receiptFoods.get(position);
 
+
             if (v.getId() == plusBTN.getId()) {
 
-                increment(receipt_food.getFoodPrice());
+                //increment(receipt_food.getFoodPrice());
+
+                int currentNos = Integer.parseInt(productQuantity.getText().toString());
+
+                productQuantity.setText(String.valueOf(++currentNos));
+                int currentPrice = Integer.parseInt(receipt_food.getFoodPrice());
+                productPrice.setText(String.valueOf(currentNos * currentPrice));
+
+                receipt_food.setShowQuantity(String.valueOf(currentNos));
+                receipt_food.setShowPrice(String.valueOf(currentNos * currentPrice));
+                fragmentListView.showFOOD();
+
+
 
             } else if (v.getId() == minusBTN.getId()) {
-                decrement(receipt_food.getFoodPrice());
+                //decrement(receipt_food.getFoodPrice());
+
+                int currentNos = Integer.parseInt(productQuantity.getText().toString());
+                productQuantity.setText(String.valueOf(--currentNos));
+                int currentPrice = Integer.parseInt(receipt_food.getFoodPrice());
+                productPrice.setText(String.valueOf(currentNos * currentPrice));
+
+                receipt_food.setShowQuantity(String.valueOf(currentNos));
+                receipt_food.setShowPrice(String.valueOf(currentNos * currentPrice));
+                fragmentListView.showFOOD();
 
             }
 
 
         }
 
-        public void increment(String price) {
+       /* public void increment(String price) {
             int currentNos = Integer.parseInt(productQuantity.getText().toString());
 
             productQuantity.setText(String.valueOf(++currentNos));
@@ -112,10 +138,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             productQuantity.setText(String.valueOf(--currentNos));
             int currentPrice = Integer.parseInt(price);
             productPrice.setText(String.valueOf(currentNos * currentPrice));
-        }
+        }*/
 
 
     }
-
+    /*public void setQuantityFromAdapter(String quantity){
+        this.foodQuantity = quantity;
+    }
+    public String getFoodQuantity(){
+        return foodQuantity;
+    }
+*/
 
 }

@@ -25,12 +25,13 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         if (method.equals("add_temp")){
 
-            String p_name = params[1];
-            Float p_price = Float.parseFloat(params[2]);
-            int p_quantity = Integer.parseInt(params[3]);
-            Float p_total = Float.valueOf(p_price * p_quantity);
+            int p_id = Integer.parseInt(params[1]);
+            String p_name = params[2];
+            Float p_price = Float.parseFloat(params[3]);
+            int p_quantity = Integer.parseInt(params[4]);
+            Float p_total = p_price * p_quantity;
             SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
-            dataBaseHelper.addTempTableInfo(db, p_name, p_price, p_quantity, p_total);
+            dataBaseHelper.addTempTableInfo(db, p_id, p_name, p_price, p_quantity);
 
             return p_name+" :::: "+p_total;
 

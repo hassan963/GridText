@@ -9,7 +9,7 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:stretchColumns="*"
         >
 
@@ -19,7 +19,7 @@
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_weight="2"
-                android:layout_height="400dp"
+                android:layout_height="match_parent"
                 android:name="com.example.hassanmashraful.gridtext.FragmentView.FragmentListView"
                 >
 
@@ -29,7 +29,7 @@
                 android:id="@+id/containerGrid"
                 android:layout_width="0dp"
                 android:layout_weight="3"
-                android:layout_height="400dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="6dp"
                 android:name="com.example.hassanmashraful.gridtext.FragmentView.FragmentGridView"
                 android:orientation="vertical">
@@ -43,7 +43,7 @@
                 android:layout_weight="1"
                 android:divider="@android:color/transparent"
                 android:dividerHeight="4.0sp"
-                android:layout_height="400dp">
+                android:layout_height="match_parent">
             </ListView>
 
 
@@ -52,15 +52,16 @@
 
     </TableLayout>
 
+
     <Button
             android:id="@+id/sumFood"
             android:text="@string/sumFood"
             android:textColor="#000"
             android:textSize="40sp"
-            android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="67dp"
-        android:layout_marginBottom="52dp" />
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="match_parent" />
+
 
 </LinearLayout>
 

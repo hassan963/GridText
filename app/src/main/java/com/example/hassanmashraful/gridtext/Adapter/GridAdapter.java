@@ -37,7 +37,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.MyViewHolder> 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = inflater.inflate(R.layout.custom_row, parent, false);
+        View view = inflater.inflate(R.layout.fragment_grid_row, parent, false);
         MyViewHolder viewHolder = new MyViewHolder(view, context, foodItems);
 
         return viewHolder;

@@ -102,22 +102,7 @@ public class FragmentGridView extends Fragment {
 
     public void updateAdapter(int pos) {
 
-        /*
-        *  if (pos == 0){
-            //adapter_grid = new Adapter_Grid(getActivity(), setRice());
-            //adapter_grid.notifyDataSetChanged();
-        }else if (pos == 1){
-            //adapter_grid = new Adapter_Grid(getActivity(), getDrinks());
-            //adapter_grid.notifyDataSetChanged();
-        }
-        else if (pos == 2){
-            //adapter_grid = new Adapter_Grid(getActivity(), getBuffo());
-            //adapter_grid.notifyDataSetChanged();
-        }
 
-        //gridView.setAdapter(adapter_grid);
-        //adapter_grid.notifyDataSetChanged();
-        * */
 
         this.pos = pos;
 
